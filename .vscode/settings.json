@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "lab-2/src/Pokemon.jar"
+  ]
+}
