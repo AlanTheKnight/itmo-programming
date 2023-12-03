@@ -1,0 +1,147 @@
+@startuml ClassesModel
+
+package characters {
+    abstract class Character {
+        # name: String
+        # voice: boolean = true
+        # happinessLevel: HappinessLevel = HappinessLevel.NEUTRAL
+        -- constructors --
+        + Character(name: String)
+        + Character(name: String, hasVoice: boolean)
+        + Character(name: String, happinessLevel: HappinessLevel)
+        + Character(name: String, hasVoice: boolean, happinessLevel: HappinessLevel)
+        -- methods --
+        + getHappinessLevel(): HappinessLevel
+        + setHappinessLevel(happinessLevel: HappinessLevel): void
+        + getName(): String
+        + enterHouse(house: House): void
+        + leaveHouse(house: House): void
+        + say(message: String): void
+        + sayGoodbye(): void
+        + laugh(seconds: int, callback: LaughCallback): void
+        + getVoice(): boolean
+        + setVoice(hasVoice: boolean): void
+        + sing(song: Song): void
+        + sing(lyrics: String): void
+        + toString(): String
+        + equals(obj: Object): boolean
+        + hashCode(): int
+        + goToLunch(): void
+    }
+
+
+    class ChristopherRobin extends Character {
+        # name = "Кристофер Робин"
+    }
+
+    class Pooh extends Character {
+        # name = "Пух"
+    }
+
+    class Pyatachok extends Character {
+        # name = "Пятачок"
+    }
+
+    class Ia extends Character {
+        # name = "Иа"
+    }
+
+    interface LaughCallback {
+        void afterLaugh()
+    }
+
+    enum HappinessLevel {
+        HAPPY
+        SAD
+        NEUTRAL
+    }
+}
+
+package house {
+    class House {
+        # name: String
+        # owner: Character
+        # characters_inside: ArrayList<Character>
+        -- constructors --
+        + House(name: String)
+        + House(name: String, owner: Character)
+        -- methods --
+        + getName(): String
+        + setName(name: String): String
+        + getOwner(): Character
+        + setOwner(owner: Character): void
+        + addCharacter(character: Character): void
+        + removeCharacter(character: Character): void
+        + getCharactersInside(): ArrayList<Character>
+        + toString(): String
+        + equals(obj: Object): boolean
+    }
+
+    class HouseLeavingException extends Exception {
+        + HouseLeavingException(message: String)
+    }
+}
+
+package mistake {
+    class TerribleMistake {
+        # desciption: String
+        -- constructors --
+        + TerribleMistake(desciption: String)
+        -- methods --
+        + getDesciption(): String
+        + setDesciption(desciption: String): void
+        + toString(): String
+        + equals(obj: Object): boolean
+        + hashCode(): int
+    }
+}
+
+package songs {
+    class LyricsReader {
+        + readLyrics(filename: String): ArrayList<String>
+    }
+
+    class Song {
+        # name: String
+        # words: ArrayList<String>
+        -- constructors --
+        + Song(name: String, lyricsFilename: String)
+        -- methods --
+        + getName(): String
+        + setName(name: String): void
+        + getWords(): ArrayList<String>
+        + loadLyrics(lyricsFilename: String): void
+        + toString(): String
+        + equals(obj: Object): boolean
+        + hashCode(): int
+    }
+
+    interface WeatherSongDetector {
+        + detectSong(weather: Weather): Song
+    }
+}
+
+package weather {
+    class Weather {
+        # type: WeatherType
+        -- constructors --
+        + Weather(type: WeatherType)
+        -- methods --
+        + getType(): WeatherType
+        + setType(type: WeatherType): void
+        + toString(): String
+        + equals(obj: Object): boolean
+    }
+
+    enum WeatherType {
+        SUNNY
+        RAINY
+        CLOUDY
+        WINDY
+        SNOWY
+        FOGGY
+    }
+}
+
+
+@enduml
