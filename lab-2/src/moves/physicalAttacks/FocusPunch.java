@@ -29,7 +29,7 @@ public class FocusPunch extends PhysicalMove {
     }
 
     @Override
-    protected String describe() {
+    public String describe() {
         return "использует Focus Punch";
     }
 }

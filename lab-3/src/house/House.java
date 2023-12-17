@@ -9,7 +9,7 @@ public class House {
     protected Character owner = null;
     protected ArrayList<Character> characters_inside = new ArrayList<Character>();
 
-    House(String name) {
+    public House(String name) {
         this.name = name;
     }
 

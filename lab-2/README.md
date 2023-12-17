@@ -81,7 +81,5 @@ wget https://se.ifmo.ru/documents/10180/660917/Pokemon.jar/a7ce60af-6ee6-47d0-a9
 ## Сборка лабораторной
 
 ```bash
-javac *.java moves/**/*.java pokemons/**/*.java -classpath Pokemon.jar
-jar cfm Lab2.jar MANIFEST.MF *.class moves/ pokemons/ Pokemon.jar
-java -jar Lab2.jar
+javac *.java moves/**/*.java pokemons/**/*.java -classpath Pokemon.jar && jar cfm Lab2.jar MANIFEST.MF *.class moves/ pokemons/ Pokemon.jar && java -jar Lab2.jar
 ```

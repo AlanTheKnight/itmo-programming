@@ -12,16 +12,18 @@ public class Main {
     public static void main(String[] args) {
 
         // Создание персонажей
-        ChristopherRobin christopherRobin = new ChristopherRobin();
-        Pooh pooch = new Pooh();
-        Pyatachok pyatachok = new Pyatachok();
-        Ia ia = new Ia(HappinessLevel.HAPPY);
+        var christopherRobin = new Character("Кристофер Робин");
+        var pooch = new Character("Пух");
+        var pyatachok = new Character("Пятачок");
+        var ia = new Character("Иа", HappinessLevel.HAPPY);
+
+        var lyricsReader = new LyricsFileReader("lyrics/snowy_weather_song.txt");
 
         // Создание песен
         WeatherSongDetector wsd = (Weather weather) -> {
             switch (weather.getType()) {
                 case SNOWY:
-                    return new Song("Дорожняя Шумелка для Зимней Погоды", "lyrics/snowy_weather_song.txt");
+                    return new Song("Дорожняя Шумелка для Зимней Погоды", lyricsReader);
                 default:
                     return null;
             }
@@ -67,7 +69,7 @@ public class Main {
 
         pyatachok.setVoice(false);
         christopherRobin.laugh(3, () -> {
-            song.getWords().forEach(line -> {
+            song.getLyrics().forEach(line -> {
                 threeFriends.forEach(ch -> ch.sing(line));
             });
         });

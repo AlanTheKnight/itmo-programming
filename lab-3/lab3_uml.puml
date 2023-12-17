@@ -1,7 +1,7 @@
 @startuml ClassesModel
 
 package characters {
-    abstract class Character {
+    class Character {
         # name: String
         # voice: boolean = true
         # happinessLevel: HappinessLevel = HappinessLevel.NEUTRAL
@@ -27,23 +27,6 @@ package characters {
         + equals(obj: Object): boolean
         + hashCode(): int
         + goToLunch(): void
-    }
-
-
-    class ChristopherRobin extends Character {
-        # name = "Кристофер Робин"
-    }
-
-    class Pooh extends Character {
-        # name = "Пух"
-    }
-
-    class Pyatachok extends Character {
-        # name = "Пятачок"
-    }
-
-    class Ia extends Character {
-        # name = "Иа"
     }
 
     interface LaughCallback {
@@ -97,23 +80,48 @@ package mistake {
 }
 
 package songs {
-    class LyricsReader {
-        + readLyrics(filename: String): ArrayList<String>
+    interface LyricsReader {
+        + readLyrics(): ArrayList<String>
     }
 
-    class Song {
+    class LyricsManualReader implements LyricsReader  {
+        - lyrics: ArrayList<String>
+
+        + LyricsManualReader(lyrics: ArrayList<String>)
+        + readLyrics(): ArrayList<String>
+    }
+
+    class LyricsFileReader implements LyricsReader {
+        - filename: String
+
+        + LyricsFileReader(filename: String)
+        - readLyricsFromFile(): ArrayList<String>
+        + readLyrics(): ArrayList<String>
+    }
+
+    abstract class MusicalObject {
         # name: String
-        # words: ArrayList<String>
         -- constructors --
-        + Song(name: String, lyricsFilename: String)
+        + MusicalObject(name: String)
         -- methods --
         + getName(): String
         + setName(name: String): void
-        + getWords(): ArrayList<String>
-        + loadLyrics(lyricsFilename: String): void
+        + getRepresentation(): String
         + toString(): String
         + equals(obj: Object): boolean
         + hashCode(): int
+    }
+
+    class Song extends MusicalObject {
+        # lyrics: ArrayList<String>
+        -- constructors --
+        + Song(name: String, lyricsReader: LyricsReader)
+        -- methods --
+        + getRepresentation(): String
+        + getLyrics(): ArrayList<String>
+        + loadLyrics(lyricsFilename: String): void
+        + toString(): String
+        + equals(obj: Object): boolean
     }
 
     interface WeatherSongDetector {
@@ -142,6 +150,5 @@ package weather {
         FOGGY
     }
 }
-
 
 @enduml

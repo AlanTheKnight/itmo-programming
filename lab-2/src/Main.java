@@ -29,6 +29,12 @@ public class Main {
         b.addFoe(p5);
         b.addFoe(p6);
 
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                System.out.println("The great battle has ended! Quitting...");
+            }
+        });
+
         b.go();
     }
 }

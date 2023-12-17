@@ -3,26 +3,26 @@ package characters;
 import house.House;
 import songs.Song;
 
-public abstract class Character {
+public class Character {
     protected String name;
     protected boolean voice = true;
     protected HappinessLevel happinessLevel = HappinessLevel.NEUTRAL;
 
-    Character(String name) {
+    public Character(String name) {
         this.name = name;
     }
 
-    Character(String name, boolean hasVoice) {
+    public Character(String name, boolean hasVoice) {
         this.name = name;
         this.voice = hasVoice;
     }
 
-    Character(String name, HappinessLevel happinessLevel) {
+    public Character(String name, HappinessLevel happinessLevel) {
         this.name = name;
         this.happinessLevel = happinessLevel;
     }
 
-    Character(String name, boolean hasVoice, HappinessLevel happinessLevel) {
+    public Character(String name, boolean hasVoice, HappinessLevel happinessLevel) {
         this.name = name;
         this.voice = hasVoice;
         this.happinessLevel = happinessLevel;
